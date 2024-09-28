@@ -1,0 +1,60 @@
+/* Main container for the search stock page */
+.search-stock-container {
+    padding: 20px;
+    background-color: #1e1e1e; /* Dark background */
+    color: #fff; /* White text for contrast */
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto; /* Full height */
+}
+
+/* Heading for the search stock page */
+.search-stock-header {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #00d1b2; /* Vibrant color for headings */
+}
+
+/* Search results section */
+.search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Individual search result item */
+.search-result-item {
+    background-color: #3498db; /* Color for search result items */
+    padding: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+/* Change background color on hover */
+.search-result-item:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Button to go back to stock page */
+.back-button {
+    background-color: #e74c3c; /* Red background for the button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+
+/* Change background color on button hover */
+.back-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}

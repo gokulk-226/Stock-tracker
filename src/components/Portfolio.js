@@ -36,7 +36,7 @@ const Portfolio = () => {
 
     return (
         <div>
-            <h2>Your Portfolio</h2>
+            <h2>Your Stocks</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

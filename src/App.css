@@ -1,0 +1,141 @@
+/* Base Styles */
+* {
+  box-sizing: border-box; /* Ensure padding and borders are included in width and height */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5; /* Soft background color */
+  color: #333; /* Default text color */
+}
+
+.app {
+  text-align: center;
+}
+
+/* Header Styles */
+.header {
+  background-color: #1e3a8a; /* Dark blue background */
+  padding: 15px 20px; /* Added padding for better spacing */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Header Title */
+.header h1 {
+  margin: 0;
+  flex: 1;
+  text-align: left;
+  font-size: 24px; /* Increased font size for better visibility */
+}
+
+/* Navigation Styles */
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox for horizontal layout */
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 8px 12px; /* Added padding for better click area */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+}
+
+/* Main Content Area */
+main {
+  padding: 20px;
+}
+
+/* Search Container Styles */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Search Input Styles */
+.search-input {
+  padding: 10px; /* Increased padding for comfort */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  transition: border-color 0.3s ease; /* Smooth transition */
+}
+
+/* Focus Effect for Search Input */
+.search-input:focus {
+  outline: none; /* Remove default outline */
+  border-color: #1e3a8a; /* Change border color on focus */
+}
+
+/* Search Button Styles */
+.search-button {
+  padding: 10px 15px; /* Adjusted padding */
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover Effect for Search Button */
+.search-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Stack header items vertically on small screens */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .header h1 {
+    margin-bottom: 10px; /* Space below the title */
+  }
+
+  nav ul {
+    flex-wrap: wrap; /* Allow navigation items to wrap */
+    justify-content: center; /* Center navigation items */
+  }
+
+  nav ul li {
+    margin: 5px 10px; /* Adjust margin for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    flex-direction: column; /* Stack search input and button vertically */
+    align-items: stretch; /* Stretch items to full width */
+  }
+
+  .search-input {
+    margin-bottom: 10px; /* Space between input and button */
+    width: 100%; /* Full width on small screens */
+  }
+
+  .search-button {
+    width: 100%; /* Full width on small screens */
+  }
+}

@@ -1,55 +1,96 @@
+/* Stock Search Component Styles */
 .stock-search {
-  width: 60%; /* Reduced width for a more compact appearance */
-  margin: 20px auto; /* Centering with a small margin */
-  padding: 15px; /* Reduced padding for compactness */
-  background-color: white;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px; /* Slightly reduced border radius */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    width: 60%;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease; /* Add transition effect for hover */
+}
+
+.stock-search:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
 }
 
 .search-input {
-  width: calc(100% - 100px); /* Adjusted width to fit better */
-  padding: 8px; /* Reduced padding for the input */
-  border: 1px solid #dcdcdc;
-  border-radius: 4px; /* Reduced border radius */
-  margin-right: 5px; /* Reduced margin on the right */
+    width: calc(100% - 100px);
+    padding: 8px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 16px; /* Increased font size */
 }
 
 .search-button {
-  padding: 8px 12px; /* Adjusted padding for a smaller button */
-  background-color: #1e3a8a; /* Dark blue button color */
-  color: white;
-  border: none; /* Ensure no border for a clean look */
-  border-radius: 4px; /* Reduced border radius */
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for hover */
+    padding: 8px 12px;
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform effect */
 }
 
 .search-button:hover {
-  background-color: #4f46e5; /* Hover color */
+    background-color: #4f46e5;
+    transform: scale(1.05); /* Slightly scale up on hover */
 }
 
-.table-container {
-  margin-top: 15px; /* Reduced margin above the table */
+.error-message {
+    color: red;
+    font-weight: bold; /* Emphasized error messages */
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.suggestions-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 5px 0;
+    border: 1px solid #ddd; /* Added border around suggestions */
+    border-radius: 4px; /* Rounded corners */
+    max-height: 200px; /* Limit height */
+    overflow-y: auto; /* Enable scrolling */
+    background-color: white; /* Background for suggestions */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for suggestions */
 }
 
-table th, table td {
-  padding: 8px; /* Reduced padding for table cells */
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.suggestion-item {
+    padding: 8px; /* Increased padding for clickable items */
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Smooth background transition */
 }
 
-table th {
-  background-color: #1e3a8a; /* Dark blue header */
+.suggestion-item:hover {
+    background-color: rgba(30, 58, 138, 0.1); /* Highlight on hover */
+}
+
+.stock-chart {
+    margin-top: 20px; /* Add space above chart */
+}
+
+h2 {
+    color: #1e3a8a; /* Dark blue color for headings */
+    margin-bottom: 10px; /* Space below heading */
+}
+.add-watchlist-button {
+  padding: 8px 12px;
+  background-color: #28a745; /* Green background for the watchlist button */
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform effect */
+  margin-left: 5px; 
+  /* Add space between search and watchlist button */
 }
 
-table tr:hover {
-  background-color: rgba(30, 58, 138, 0.1); /* Light hover effect */
+.add-watchlist-button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+.add-watchlist-button:disabled {
+  background-color: #d6d6d6; /* Gray background for disabled state */
+  cursor: not-allowed; /* Change cursor to indicate disabled */
 }

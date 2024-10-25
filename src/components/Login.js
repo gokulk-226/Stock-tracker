@@ -10,8 +10,31 @@ function Login({ setIsLoggedIn }) {
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
 
+  // Simple email validation function
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  // Simple password validation function
+  const validatePassword = (password) => {
+    return password.length >= 6; // Example: Password must be at least 6 characters
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(''); // Reset error message
+
+    // Validate email and password
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (!validatePassword(password)) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
@@ -32,6 +55,18 @@ function Login({ setIsLoggedIn }) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError(''); // Reset error message
+
+    // Validate email and password
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (!validatePassword(password)) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/register', {
         method: 'POST',

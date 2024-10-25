@@ -1,0 +1,55 @@
+// src/components/News.js
+
+import React, { useEffect, useState, useCallback } from 'react';
+import './News.css'; // Ensure you import the CSS file
+
+const News = () => {
+    const [search, setSearch] = useState("Stocks"); 
+    const [newsData, setNewsData] = useState(null);
+    const API_KEY = "b6416b78bc0349dea2c69fd9b3482950";
+
+    const getData = useCallback(async () => {
+        const response = await fetch(`https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`);
+        const jsonData = await response.json();
+        console.log(jsonData.articles);
+        let dt = jsonData.articles.slice(0, 10); // Get top 10 articles
+        setNewsData(dt);
+    }, [search]);
+
+    useEffect(() => {
+        getData(); // Fetch stock market news when the component mounts
+    }, [getData]);
+
+    const userInput = (event) => {
+        setSearch(event.target.value);
+        getData(); // Fetch new data when category button is clicked
+    };
+
+    return (
+        <div>
+            <nav>
+                <div>
+                    <h1>Stock Market News</h1>
+                </div>
+            </nav>
+            <div>
+                <p className="head">Latest Stock Market Updates</p>
+            </div>
+            <div className="categoryBtn">
+                <button onClick={userInput} value="money">Money</button>
+                <button onClick={userInput} value="investment">Investment</button>
+            </div>
+            <div>
+                {newsData && newsData.map((article, index) => (
+                    <div key={index} className="news-item">
+                        {article.urlToImage && <img src={article.urlToImage} alt={article.title} />}
+                        <h3>{article.title}</h3>
+                        <a href={article.url} target="_blank" rel="noopener noreferrer">Read More</a>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default News;

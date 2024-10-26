@@ -27,15 +27,12 @@ const News = () => {
 
     return (
         <div>
-            <nav>
-                <div>
-                    <h1>Stock Market News</h1>
-                </div>
-            </nav>
+            
             <div>
-                <p className="head">Latest Stock Market Updates</p>
+                <h2 className="head">Latest Stock Market Updates</h2>
             </div>
             <div className="categoryBtn">
+                <button onClick={userInput} value="Stocks">Stocks</button>
                 <button onClick={userInput} value="money">Money</button>
                 <button onClick={userInput} value="investment">Investment</button>
             </div>

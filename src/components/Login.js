@@ -115,7 +115,7 @@ function Login({ setIsLoggedIn }) {
           <button type="submit" className="login-button">Login</button>
           <p>
             Don't have an account?{' '}
-            <button type="button" onClick={() => setIsRegistering(true)}>Register</button>
+            <button type="button" className='Register-button' onClick={() => setIsRegistering(true)}>Register</button>
           </p>
         </form>
       ) : (
@@ -153,7 +153,7 @@ function Login({ setIsLoggedIn }) {
           <button type="submit" className="login-button">Register</button>
           <p>
             Already have an account?{' '}
-            <button type="button" onClick={() => setIsRegistering(false)}>Login</button>
+            <button type="button" className='Register-Login' onClick={() => setIsRegistering(false)}>Login</button>
           </p>
         </form>
       )}

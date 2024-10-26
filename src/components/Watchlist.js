@@ -1,6 +1,6 @@
 // src/components/Watchlist.js
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import './Watchlist.css';
 
 // Create the WatchlistContext
@@ -9,9 +9,28 @@ const WatchlistContext = createContext();
 export const WatchlistProvider = ({ children }) => {
     const [watchlist, setWatchlist] = useState([]);
 
+    // Function to fetch all watchlist items from MongoDB
+    const fetchWatchlist = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/watchlist');
+            if (response.ok) {
+                const data = await response.json();
+                setWatchlist(data);
+            } else {
+                console.error('Failed to fetch watchlist from MongoDB');
+            }
+        } catch (error) {
+            console.error('Error fetching watchlist:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchWatchlist();
+    }, []);
+
     const addToWatchlist = async (stock) => {
         setWatchlist((prev) => [...prev, stock]);
-        
+
         // Save the stock to MongoDB
         try {
             const response = await fetch('http://localhost:5000/watchlist', {
@@ -24,6 +43,7 @@ export const WatchlistProvider = ({ children }) => {
 
             if (response.ok) {
                 alert(`Successfully added ${stock.symbol} to the watchlist!`);
+                fetchWatchlist(); // Refresh the watchlist after adding
             } else {
                 alert('Failed to save to MongoDB. Please try again.');
             }
@@ -64,7 +84,7 @@ const Watchlist = () => {
                         {watchlist.map((item) => (
                             <tr key={item.symbol}>
                                 <td>{item.symbol}</td>
-                                <td>${item.price.toFixed(2)}</td>
+                                <td>${item.rate.toFixed(2)}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Portfolio.css';
@@ -8,15 +7,14 @@ const Portfolio = () => {
     const [symbol, setSymbol] = useState('');
     const [price, setPrice] = useState('');
     const [shares, setShares] = useState('');
-    const [currentPrices, setCurrentPrices] = useState({}); // State to hold current prices
+    const [currentPrices, setCurrentPrices] = useState({});
 
     useEffect(() => {
-        // Fetch existing portfolio items on component mount
         const fetchPortfolio = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/portfolio');
                 setPortfolio(response.data);
-                await fetchCurrentPrices(response.data); // Fetch current prices for the portfolio
+                await fetchCurrentPrices(response.data);
             } catch (error) {
                 console.error('Error fetching portfolio', error);
             }
@@ -30,21 +28,18 @@ const Portfolio = () => {
         
         const requests = symbols.map(async (symbol) => {
             try {
-                // Fetch the latest daily price from Alpha Vantage//MM8URO0Z2LSYIMXM//HTPT7VBQI6T4PTCL
                 const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=6BR63WCGVBAXGP26`);
                 const data = await response.json();
-
-                // Get the latest trading day
                 const timeSeries = data['Time Series (Daily)'];
-                const latestDate = Object.keys(timeSeries)[0]; // Get the latest date
-                currentPrices[symbol] = parseFloat(timeSeries[latestDate]['4. close']); // Store the latest closing price
+                const latestDate = Object.keys(timeSeries)[0];
+                currentPrices[symbol] = parseFloat(timeSeries[latestDate]['4. close']);
             } catch (error) {
                 console.error(`Error fetching current price for ${symbol}`, error);
             }
         });
 
-        await Promise.all(requests); // Wait for all requests to complete
-        setCurrentPrices(currentPrices); // Update state with current prices
+        await Promise.all(requests);
+        setCurrentPrices(currentPrices);
     };
 
     const handleSubmit = async (e) => {
@@ -52,9 +47,9 @@ const Portfolio = () => {
     
         const newStock = {
             symbol,
-            price: parseFloat(price), // Ensure the correct data type
-            shares: parseInt(shares),  // Ensure the correct data type
-            purchaseRate: parseFloat(price), // Make sure to include purchaseRate
+            price: parseFloat(price),
+            shares: parseInt(shares),
+            purchaseRate: parseFloat(price),
         };
     
         try {
@@ -63,43 +58,45 @@ const Portfolio = () => {
             setSymbol('');
             setPrice('');
             setShares('');
-            fetchCurrentPrices([...portfolio, response.data]); // Fetch current prices again after adding
+            fetchCurrentPrices([...portfolio, response.data]);
         } catch (error) {
             console.error('Error adding stock', error);
         }
     };
 
     const calculateGainLossPercentage = (purchasePrice, currentPrice) => {
-        if (currentPrice === undefined || purchasePrice === 0) return 0; // Handle undefined
+        if (currentPrice === undefined || purchasePrice === 0) return 0;
         return ((currentPrice - purchasePrice) / purchasePrice) * 100;
     };
 
     return (
-        <div>
+        <div className="portfolio-container">
             <h2>Your Stocks</h2>
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Asset Symbol"
-                    value={symbol}
-                    onChange={(e) => setSymbol(e.target.value)}
-                    required
-                />
-                <input
-                    type="number"
-                    placeholder="Purchase Price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-                <input
-                    type="number"
-                    placeholder="Shares"
-                    value={shares}
-                    onChange={(e) => setShares(e.target.value)}
-                    required
-                />
-                <button type="submit">Add Asset</button>
+                <div className="input-group">
+                    <input
+                        type="text"
+                        placeholder="Asset Symbol"
+                        value={symbol}
+                        onChange={(e) => setSymbol(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="number"
+                        placeholder="Purchase Price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="number"
+                        placeholder="Shares"
+                        value={shares}
+                        onChange={(e) => setShares(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Add Asset</button>
+                </div>
             </form>
             <table>
                 <thead>
@@ -113,7 +110,7 @@ const Portfolio = () => {
                 </thead>
                 <tbody>
                     {portfolio.map(stock => {
-                        const currentPrice = currentPrices[stock.symbol]; // Get current price from state
+                        const currentPrice = currentPrices[stock.symbol];
                         const gainLossPercentage = calculateGainLossPercentage(stock.price, currentPrice);
                         
                         return (
@@ -133,4 +130,3 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
-

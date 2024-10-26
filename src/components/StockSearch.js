@@ -128,6 +128,7 @@ function StockSearch() {
             <button className="search-button" onClick={() => handleSearch(searchTerm)} disabled={loading}>
                 {loading ? 'Loading...' : 'Search'}
             </button>
+            <br/><br/>
             <button className="add-watchlist-button" onClick={handleAddToWatchlist} disabled={!stockData}>
                 Add to Watchlist
             </button>
@@ -146,7 +147,7 @@ function StockSearch() {
 
             {stockData && (
                 <div className="stock-chart">
-                    <h2>Stock Price Chart (Last 30 Days)</h2>
+                    <h2>Stock Price Chart</h2>
                     <Line data={prepareChartData()} />
                 </div>
             )}
